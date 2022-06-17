@@ -6,20 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.boriuk.koketea.R
+import com.boriuk.koketea.base.BaseFragment
 import com.boriuk.koketea.databinding.FragmentHomeBinding
 import com.boriuk.koketea.databinding.FragmentLoginBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment() {
 
     // UI
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-//        binding.rvHome
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +30,13 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setProgressBar(binding.progressBar)
+
+        // Aqui van las referncias a los componentes del fragment
     }
 
 }
