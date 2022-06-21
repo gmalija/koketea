@@ -13,7 +13,6 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
 import timber.log.Timber
 
@@ -26,10 +25,7 @@ class HomeFragment : BaseFragment() {
 
     // Firebase
     private lateinit var database: FirebaseFirestore
-//    private lateinit var storageRef: StorageReference
     private lateinit var storage: FirebaseStorage
-
-//    gs:/koketeapp.appspot.com/Prendas
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +60,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun readDataFromFirestore(){
+        showProgressBar()
         database.collection("prendas")
             .get()
             .addOnSuccessListener { result ->
@@ -87,7 +84,7 @@ class HomeFragment : BaseFragment() {
                 binding.rvHome.layoutManager = LinearLayoutManager(context)
                 binding.rvHome.adapter = adapter
 
-                Timber.e(prendas.toString())
+                hideProgressBar()
             }
             .addOnFailureListener { exception ->
                 Timber.w("Error getting documents." + exception)

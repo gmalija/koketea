@@ -58,6 +58,7 @@ class RegisterFragment : BaseFragment() {
 
     private fun createNewAccount() {
 
+        showProgressBar()
         val fullName = binding.fullNameEt.text.toString()
         val email = binding.emailEt.text.toString()
         val password = binding.passwordEt.text.toString()
@@ -109,6 +110,7 @@ class RegisterFragment : BaseFragment() {
         } else {
             Toast.makeText(context, "Llene todos los campos", Toast.LENGTH_SHORT).show()
         }
+        hideProgressBar()
     }
     //llamamos el método de crear cuenta en la accion registrar
     fun register(){
