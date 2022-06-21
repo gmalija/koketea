@@ -32,8 +32,7 @@
             android:id="@+id/signTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sign In"
-            android:textColor="#000"
+            android:text="Haz login con tu cuenta"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +46,7 @@
             android:layout_marginStart="@dimen/standard_padding"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="@dimen/standard_padding"
-            android:hint="Email Address"
-            app:boxStrokeColor="@color/purple_700"
-            app:hintTextColor="?attr/colorPrimary"
+            android:hint="Email"
             app:layout_constraintTop_toBottomOf="@id/signTv">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textEmailAddress"
-                android:textColor="#000" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -68,9 +65,7 @@
             android:layout_marginStart="@dimen/standard_padding"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="@dimen/standard_padding"
-            android:hint="Password"
-            app:boxStrokeColor="@color/purple_700"
-            app:hintTextColor="?attr/colorPrimary"
+            android:hint="Contraseña"
             app:layout_constraintTop_toBottomOf="@id/emailIl"
             app:passwordToggleEnabled="true">
 
@@ -79,15 +74,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:inputType="textPassword"
-                android:textColor="#000" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/forgotPasswordTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="forgot password"
-            android:textColor="@android:color/black"
+            android:text="Olvidé mi contraseña"
             app:layout_constraintEnd_toEndOf="@id/passwordIl"
             app:layout_constraintTop_toBottomOf="@id/passwordIl" />
 
@@ -98,7 +92,7 @@
             android:layout_marginStart="@dimen/standard_padding"
             android:layout_marginTop="@dimen/dimens_40dp"
             android:layout_marginEnd="@dimen/standard_padding"
-            android:text="sign in"
+            android:text="Login"
             app:layout_constraintTop_toBottomOf="@id/passwordIl" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -106,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/standard_padding"
-            android:text="Don't Have an account? Signup"
+            android:text="No tienes cuenta? Regístrate"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/signInBtn" />

@@ -1,21 +1,18 @@
-package com.boriuk.koketea.signIn
+package com.boriuk.koketea.ui.signIn
 
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.LayoutInflater
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.boriuk.koketea.base.BaseFragment
+import com.boriuk.koketea.ui.base.BaseFragment
 import com.boriuk.koketea.databinding.FragmentLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
-import kotlin.properties.Delegates
 
 class LoginFragment : BaseFragment() {
 
@@ -60,6 +57,7 @@ class LoginFragment : BaseFragment() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        Timber.e("User" + currentUser)
         if(currentUser != null) {
             goHome()
         }

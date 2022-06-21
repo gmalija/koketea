@@ -1,12 +1,17 @@
 package com.boriuk.koketea
 
 import android.app.Application
-import com.google.firebase.FirebaseApp
-import timber.log.Timber
+import timber.log.Timber.*
+import timber.log.Timber.Forest.plant
 
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Timber.DebugTree()
-   }
+
+//        if (BuildConfig.DEBUG) {
+            plant(DebugTree())
+//        } else {
+//            plant(CrashReportingTree())
+//        }
+    }
 }

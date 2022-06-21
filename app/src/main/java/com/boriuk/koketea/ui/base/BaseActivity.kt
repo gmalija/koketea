@@ -1,4 +1,4 @@
-package com.boriuk.koketea.base
+package com.boriuk.koketea.ui.base
 
 import android.content.Context
 import android.view.View

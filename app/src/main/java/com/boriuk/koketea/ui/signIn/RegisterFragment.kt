@@ -1,30 +1,26 @@
-package com.boriuk.koketea.signIn
+package com.boriuk.koketea.ui.signIn
 
 import android.os.Bundle
 import android.text.TextUtils
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.boriuk.koketea.R
-import com.boriuk.koketea.base.BaseFragment
-import com.boriuk.koketea.databinding.FragmentLoginBinding
+import com.boriuk.koketea.ui.base.BaseFragment
 import com.boriuk.koketea.databinding.FragmentRegisterBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import kotlin.properties.Delegates
+import timber.log.Timber
 
 class RegisterFragment : BaseFragment() {
 
     // Firebase
-    private lateinit var databaseReference: DatabaseReference
-    private lateinit var database: FirebaseDatabase
+    private lateinit var database: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
 
     // UI
@@ -52,9 +48,7 @@ class RegisterFragment : BaseFragment() {
         // Creamos una instancia para crear nuestra autenticación y guardar el usuario
         auth = Firebase.auth
         // Creamos una instancia para guardar los datos del usuario en nuestra base  de datos
-        database = FirebaseDatabase.getInstance()
-        // Reference nosotros leemos o escribimos en una ubicación específica la base de datos
-        databaseReference = database.reference.child("Users")
+        database = Firebase.firestore
 
         // Click listeners
         binding.signUpBtn.setOnClickListener{
@@ -83,21 +77,33 @@ class RegisterFragment : BaseFragment() {
                         val user: FirebaseUser = auth.currentUser!!
 
                         // Enviamos email de verificación a la cuenta del usuario
-                        verifyEmail(user);
+                        verifyEmail(user)
+
+                        // Create a new user with a first and last name
+                        val userTemp = hashMapOf(
+                            "nombre" to fullName,
+                            "email" to email,
+                            "password" to password
+                        )
 
                         // Damos de alta la información del usuario enviamos el la referencia para guardarlo en la base de datos
                         // de preferencia enviamos el id para que no se repita
-                        val currentUserDb = databaseReference.child(user.uid)
+                        // Add a new document with a generated ID
+                        database.collection("users")
+                            .add(userTemp)
+                            .addOnSuccessListener { documentReference ->
+                                Timber.d("DocumentSnapshot added with ID: ${documentReference.id}")
+                                //Por último nos vamos a la vista home
+                                updateUserInfoAndGoHome()
+                            }
+                            .addOnFailureListener { e ->
+                                Timber.e(e)
+                                Toast.makeText(context, "Error en la autenticación.", Toast.LENGTH_SHORT).show()
+                            }
 
-                        // Agregamos el nombre y el apellido dentro de user/id/
-                        currentUserDb.child("fullName").setValue(fullName)
-
-                        //Por último nos vamos a la vista home
-                        updateUserInfoAndGoHome()
                     }.addOnFailureListener{
                         // Si el registro falla se mostrara este mensaje
-                        Toast.makeText(context, "Error en la autenticación.",
-                            Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Error en la autenticación.", Toast.LENGTH_SHORT).show()
                     }
             }
         } else {
