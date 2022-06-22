@@ -7,8 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.findNavController
-import com.boriuk.koketea.ui.base.BaseFragment
 import com.boriuk.koketea.databinding.FragmentLoginBinding
+import com.boriuk.koketea.ui.base.BaseFragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -92,7 +92,6 @@ class LoginFragment : BaseFragment() {
         hideProgressBar()
 
     }
-
 
     private fun goHome() {
         // Navegamos a Home

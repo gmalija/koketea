@@ -12,7 +12,8 @@ import com.boriuk.koketea.domain.PrendaItem
 import com.bumptech.glide.Glide
 
 class HomeAdapter(private val dataSet: ArrayList<PrendaItem>,
-                  private val context: Context) :
+                  private val context: Context,
+                  private val onClick: (String) -> Unit) :
     RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
 
     /**
@@ -44,6 +45,11 @@ class HomeAdapter(private val dataSet: ArrayList<PrendaItem>,
         Glide.with(context)
             .load(dataSet[position].imagen)
             .into(viewHolder.imPrenda)
+
+        // On click
+        viewHolder.itemView.setOnClickListener {
+            onClick(dataSet[position].id)
+        }
 
     }
 

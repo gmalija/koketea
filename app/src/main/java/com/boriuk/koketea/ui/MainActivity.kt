@@ -1,7 +1,7 @@
 package com.boriuk.koketea.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.boriuk.koketea.R
 
 class MainActivity : AppCompatActivity() {

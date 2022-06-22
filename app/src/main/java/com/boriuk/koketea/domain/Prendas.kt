@@ -7,6 +7,7 @@ data class Prendas(
 )
 
 data class PrendaItem(
+    var id: String = "",
     var descripcion: String? = "",
     var precio: Long? = 0,
     var imagen: StorageReference
